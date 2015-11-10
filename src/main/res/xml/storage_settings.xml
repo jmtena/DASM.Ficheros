@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/opcionesAlmacenamiento" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="sd_storage_active"
+            android:title="@string/almacenamientoSD"
+            android:summary="@string/almacenamientoSD_sum">
+        </CheckBoxPreference>
+
+        <EditTextPreference
+            android:title="@string/nombreFichero"
+            android:summary="@string/nombreFichero_sum"
+            android:key="prefUsername"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

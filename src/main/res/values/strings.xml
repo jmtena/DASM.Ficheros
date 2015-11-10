@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Sesión 4: Ficheros</string>
+
+    <string name="botónAñadir">Añadir</string>
+    <string name="opcionVaciar">Vaciar Fichero</string>
+    <string name="opcionAjustes">Ajustes</string>
+    <string name="hintTexto">Texto a añadir</string>
+    <string name="txtOnStart">Pulsa para mostrar el contenido del fichero</string>
+    <string name="txtFicheroVacio">El fichero está vacío</string>
+    <string name="txtErrorEscribir">No puedo escribir en la memoria externa</string>
+
+    <string name="opcionesAlmacenamiento">Opciones de Almacenamiento</string>
+    <string name="almacenamientoSD">Almacenamiento en tarjeta SD</string>
+    <string name="almacenamientoSD_sum"></string>
+
+    <string name="nombreFichero">Nombre del fichero</string>
+    <string name="nombreFichero_sum">Nombre del fichero en el que se guardará la información</string>
+</resources>
