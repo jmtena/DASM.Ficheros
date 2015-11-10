@@ -12,7 +12,7 @@
         <EditTextPreference
             android:title="@string/nombreFichero"
             android:summary="@string/nombreFichero_sum"
-            android:key="prefUsername"/>
+            android:key="filename"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -2,14 +2,17 @@ package es.upm.miw.ficheros;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,17 +27,23 @@ import java.io.IOException;
 
 public class FicherosActivity extends AppCompatActivity {
 
-    private final String NOMBRE_FICHERO = "miFichero.txt";
+    private String NOMBRE_FICHERO = "miFichero.txt";
     private String RUTA_FICHERO;         /** SD card o phone memory**/
     EditText lineaTexto;
     Button botonAniadir;
     TextView contenidoFichero;
+
+    private Menu menu_ficheros;
 
     private static final int RESULT_SETTINGS = 1;
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        inicializar_fichero();
+        inicializar_icono_destino();
+        lineaTexto.setText("");
         mostrarContenido(contenidoFichero);
     }
 
@@ -42,12 +51,19 @@ public class FicherosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_ficheros);
 
         lineaTexto       = (EditText) findViewById(R.id.textoIntroducido);
         botonAniadir     = (Button)   findViewById(R.id.botonAniadir);
         contenidoFichero = (TextView) findViewById(R.id.contenidoFichero);
 
+        inicializar_fichero();
+        inicializar_icono_destino();
+    }
+
+    private void inicializar_fichero(){
+        NOMBRE_FICHERO = getNombre_de_fichero();
         if (ExternalSdStorageActivated()) {
             /** SD card **/
             RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
@@ -55,7 +71,25 @@ public class FicherosActivity extends AppCompatActivity {
             /** phone memory **/
             RUTA_FICHERO = getFilesDir() + "/" + NOMBRE_FICHERO;
         }
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        inicializar_icono_destino();
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void inicializar_icono_destino(){
+        if (menu_ficheros==null)
+            return;
+
+        MenuItem menuItem = menu_ficheros.findItem(R.id.icono_almacenamiento);
+        if (ExternalSdStorageActivated()){
+            menuItem.setIcon(R.drawable.sd);
+        }
+        else {
+            menuItem.setIcon(R.drawable.memory);
+        }
     }
 
     /**
@@ -102,7 +136,15 @@ public class FicherosActivity extends AppCompatActivity {
     }
 
     private boolean ExternalSdStorageActivated(){
-        return false;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        return prefs.getBoolean("sd_storage_active", true);
+    }
+
+    private String getNombre_de_fichero(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        return prefs.getString("filename", null);
     }
 
     /**
@@ -153,6 +195,8 @@ public class FicherosActivity extends AppCompatActivity {
         // Inflador del menú: añade elementos a la action bar
         getMenuInflater().inflate(R.menu.menu, menu);
 
+        menu_ficheros = menu;
+        inicializar_icono_destino();
         return true;
     }
 

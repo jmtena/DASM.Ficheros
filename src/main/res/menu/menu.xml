@@ -21,4 +21,12 @@
         app:showAsAction="ifRoom|withText"
         />
 
+    <item
+        android:id="@+id/icono_almacenamiento"
+        android:title="icono_memoria"
+        android:icon="@drawable/memory"
+        android:orderInCategory="10"
+        app:showAsAction="ifRoom|withText"
+        />
+
 </menu>

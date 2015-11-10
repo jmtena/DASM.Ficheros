@@ -11,7 +11,7 @@
 
     <string name="opcionesAlmacenamiento">Opciones de Almacenamiento</string>
     <string name="almacenamientoSD">Almacenamiento en tarjeta SD</string>
-    <string name="almacenamientoSD_sum"></string>
+    <string name="almacenamientoSD_sum">Si se activa esta opción se almacenará la información en la tarjeta SD (si está disponible)</string>
 
     <string name="nombreFichero">Nombre del fichero</string>
     <string name="nombreFichero_sum">Nombre del fichero en el que se guardará la información</string>
